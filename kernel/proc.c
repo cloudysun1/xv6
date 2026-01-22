@@ -627,6 +627,19 @@ either_copyin(void *dst, int user_src, uint64 src, uint64 len)
   }
 }
 
+uint64
+kcollect_active_procs(void){
+  uint64 count = 0;
+  struct proc *p;
+  for(p = proc; p<&proc[NPROC]; p++){
+    acquire(&p->lock);
+    if(p->state != UNUSED){
+      count++;
+    }
+    release(&p->lock);
+  }
+  return count;
+}
 // Print a process listing to console.  For debugging.
 // Runs when user types ^P on console.
 // No lock to avoid wedging a stuck machine further.
