@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  trend-hl:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    image: trend-hl:latest
+    container_name: trend-hl
+    restart: unless-stopped
+    env_file:
+      - ../.env
+    environment:
+      - TZ=UTC
+    volumes:
+      - ../data:/app/data
+    networks:
+      - trend-net
+    logging:
+      driver: json-file
+      options:
+        max-size: "20m"
+        max-file: "5"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 1g
+
+networks:
+  trend-net:
+    driver: bridge

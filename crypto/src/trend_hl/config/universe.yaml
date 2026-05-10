@@ -1,0 +1,19 @@
+# Hyperliquid universe — symbols the strategy is allowed to trade.
+# tick/lot are loaded dynamically from `meta` at startup; the values below are
+# fallbacks in case the network call fails on cold-start.
+symbols:
+  - symbol: BTC
+    enabled: true
+    weight: 1.0
+  - symbol: ETH
+    enabled: true
+    weight: 1.0
+  - symbol: SOL
+    enabled: true
+    weight: 0.7
+  - symbol: ARB
+    enabled: false
+    weight: 0.5
+  - symbol: AVAX
+    enabled: false
+    weight: 0.5
